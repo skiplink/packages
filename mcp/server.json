@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "io.github.skiplink/mcp",
+  "title": "Skiplink",
+  "description": "Explain axe-core accessibility rules, read a project's baseline, and scan a URL for WCAG violations.",
+  "version": "1.0.0",
+  "websiteUrl": "https://skiplink.dev/integrations/mcp/",
+  "repository": {
+    "url": "https://github.com/skiplink/packages",
+    "source": "github",
+    "subfolder": "mcp"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "@skiplink/mcp",
+      "version": "1.0.0",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        {
+          "name": "SKIPLINK_TOKEN",
+          "description": "Skiplink API key. Only the scan_url tool needs it; the other four work without one.",
+          "isRequired": false,
+          "isSecret": true
+        },
+        {
+          "name": "SKIPLINK_API",
+          "description": "API base URL. Defaults to https://api.skiplink.dev.",
+          "isRequired": false,
+          "isSecret": false
+        }
+      ]
+    }
+  ]
+}

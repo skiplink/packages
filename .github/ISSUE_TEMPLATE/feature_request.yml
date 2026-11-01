@@ -1,0 +1,19 @@
+name: Feature request
+description: Something Skiplink should do that it does not.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What are you trying to do, and what gets in the way today? The problem matters more than the proposed fix.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would help
+  - type: textarea
+    id: workaround
+    attributes:
+      label: What you do instead today

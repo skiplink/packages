@@ -1,0 +1,55 @@
+name: Bug report
+description: Something did not work the way the docs say it should.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Remove any API keys or secrets from what you paste — keys start with `skl_live_`.
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Where did it happen?
+      options:
+        - GitHub Action (skiplink/action)
+        - CLI (@skiplink/cli)
+        - Playwright adapter (@skiplink/playwright)
+        - Cypress adapter (@skiplink/cypress)
+        - MCP server (@skiplink/mcp)
+        - "@skiplink/core"
+        - Hosted API
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: "`npx @skiplink/cli --version`, the package version from your lockfile, or the Action tag."
+      placeholder: 1.0.0
+  - type: textarea
+    id: ran
+    attributes:
+      label: What you ran
+      description: The command or workflow step.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened
+      description: Output and exit code. For a finding you disagree with, include the rule id and, if public, the URL.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: Node 22, ubuntu-latest / macOS 15

@@ -1,0 +1,70 @@
+{
+  "name": "@skiplink/core",
+  "version": "1.0.0",
+  "description": "Violation identity and baseline diffing shared by the Skiplink CLI and test-framework adapters.",
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "wcag",
+    "axe-core",
+    "baseline",
+    "fingerprint",
+    "ci"
+  ],
+  "homepage": "https://skiplink.dev",
+  "bugs": {
+    "url": "https://github.com/skiplink/packages/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skiplink/packages.git",
+    "directory": "packages/core"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Farid Mammadov",
+    "email": "faridmmmdv@gmail.com"
+  },
+  "type": "module",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./fingerprint": {
+      "types": "./src/fingerprint.d.ts",
+      "default": "./src/fingerprint.js"
+    },
+    "./baseline": {
+      "types": "./src/baseline.d.ts",
+      "default": "./src/baseline.js"
+    },
+    "./report": {
+      "types": "./src/report.d.ts",
+      "default": "./src/report.js"
+    },
+    "./axe": {
+      "types": "./src/axe.d.ts",
+      "default": "./src/axe.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "src"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "prepublishOnly": "node --test"
+  },
+  "dependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
+}

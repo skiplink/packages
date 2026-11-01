@@ -1,0 +1,15 @@
+{
+  "name": "skiplink-packages",
+  "private": true,
+  "description": "Workspace root for the @skiplink packages mirror. Nothing here is published; the packages are.",
+  "workspaces": [
+    "packages/core",
+    "cli",
+    "adapters/playwright",
+    "adapters/cypress",
+    "mcp"
+  ],
+  "scripts": {
+    "test": "npm test --workspaces --if-present"
+  }
+}

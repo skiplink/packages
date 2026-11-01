@@ -1,0 +1,182 @@
+[
+  {
+    "note": "plain case",
+    "rule": "color-contrast",
+    "selector": ".hero__subtitle",
+    "html": "\u003cp class=\"hero__subtitle\"\u003eShip faster\u003c/p\u003e",
+    "fingerprint": "f_a91a55e2",
+    "fingerprint_loose": "f_8dc06a51",
+    "normalised_selector": ".hero__subtitle",
+    "normalised_text": "ship faster"
+  },
+  {
+    "note": "build-hashed class collapses so a rebuild does not change identity",
+    "rule": "color-contrast",
+    "selector": ".css-1x2y3z4 \u003e .sc-fzXfLU",
+    "html": "\u003cspan class=\"css-1x2y3z4\"\u003eBuy now\u003c/span\u003e",
+    "fingerprint": "f_0c7f5722",
+    "fingerprint_loose": "f_d0f4a415",
+    "normalised_selector": ".css-1x2y3z4 \u003e .sc-fzXfLU",
+    "normalised_text": "buy now"
+  },
+  {
+    "note": "axe iframe path separator, spaced and unspaced, must normalise the same",
+    "rule": "image-alt",
+    "selector": "#frame \u003e\u003e\u003e img.logo",
+    "html": "\u003cimg class=\"logo\"\u003e",
+    "fingerprint": "f_ca90b26d",
+    "fingerprint_loose": "f_7587a898",
+    "normalised_selector": "#frame\u003e\u003e\u003eimg.logo",
+    "normalised_text": ""
+  },
+  {
+    "note": "same selector without spaces around the separator",
+    "rule": "image-alt",
+    "selector": "#frame\u003e\u003e\u003eimg.logo",
+    "html": "\u003cimg class=\"logo\"\u003e",
+    "fingerprint": "f_ca90b26d",
+    "fingerprint_loose": "f_7587a898",
+    "normalised_selector": "#frame\u003e\u003e\u003eimg.logo",
+    "normalised_text": ""
+  },
+  {
+    "note": "text-free element falls back to markup shape with attribute values stripped",
+    "rule": "image-alt",
+    "selector": "img:nth-child(4)",
+    "html": "\u003cimg src=\"/hero-9f2c1a.png\" width=\"800\"\u003e",
+    "fingerprint": "f_228ca8b9",
+    "fingerprint_loose": "f_af9a1000",
+    "normalised_selector": "img:nth-child(4)",
+    "normalised_text": ""
+  },
+  {
+    "note": "empty link: no text, shape carries the identity",
+    "rule": "link-name",
+    "selector": "a[href='/x']",
+    "html": "\u003ca href=\"/x\"\u003e\u003cspan class=\"icon\"\u003e\u003c/span\u003e\u003c/a\u003e",
+    "fingerprint": "f_0ad17f03",
+    "fingerprint_loose": "f_8a18879a",
+    "normalised_selector": "a[href='/x']",
+    "normalised_text": ""
+  },
+  {
+    "note": "nested tags become spaces, whitespace collapses",
+    "rule": "heading-order",
+    "selector": "h3",
+    "html": "\u003ch3\u003e  Pricing\n\tand   \u003cem\u003eplans\u003c/em\u003e  \u003c/h3\u003e",
+    "fingerprint": "f_fed584c9",
+    "fingerprint_loose": "f_8bdfd3bf",
+    "normalised_selector": "h3",
+    "normalised_text": "pricing and plans"
+  },
+  {
+    "note": "non-breaking space: Go's \\s does not match U+00A0, JavaScript's does",
+    "rule": "color-contrast",
+    "selector": ".price",
+    "html": "\u003cp class=\"price\"\u003e 29 per month\u003c/p\u003e",
+    "fingerprint": "f_0a6c7d17",
+    "fingerprint_loose": "f_a2afc39e",
+    "normalised_selector": ".price",
+    "normalised_text": "29 per month"
+  },
+  {
+    "note": "other Unicode spaces JavaScript's \\s matches and Go's does not",
+    "rule": "color-contrast",
+    "selector": ".spaced",
+    "html": "\u003cp\u003ea b c　d﻿e\u003c/p\u003e",
+    "fingerprint": "f_c32a0600",
+    "fingerprint_loose": "f_63f2e065",
+    "normalised_selector": ".spaced",
+    "normalised_text": "a b c　d﻿e"
+  },
+  {
+    "note": "multibyte text past the 120-byte limit: byte truncation, not code units",
+    "rule": "color-contrast",
+    "selector": ".ru",
+    "html": "\u003cp\u003eМы проверяем доступность каждой страницы вашего сайта автоматически и сообщаем о найденных проблемах немедленно всегда\u003c/p\u003e",
+    "fingerprint": "f_1b1ed454",
+    "fingerprint_loose": "f_d94faf82",
+    "normalised_selector": ".ru",
+    "normalised_text": "Мы проверяем доступность каждой страницы вашего сайта автоматич"
+  },
+  {
+    "note": "emoji at the truncation boundary must not split a rune",
+    "rule": "color-contrast",
+    "selector": ".emoji",
+    "html": "\u003cp\u003eaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa🎉tail\u003c/p\u003e",
+    "fingerprint": "f_510c3fde",
+    "fingerprint_loose": "f_81385d3a",
+    "normalised_selector": ".emoji",
+    "normalised_text": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  {
+    "note": "case folding and surrounding whitespace",
+    "rule": "button-name",
+    "selector": "  button.PRIMARY  ",
+    "html": "\u003cbutton class=\"PRIMARY\"\u003e  SUBMIT  \u003c/button\u003e",
+    "fingerprint": "f_901afca5",
+    "fingerprint_loose": "f_ed354471",
+    "normalised_selector": "button.PRIMARY",
+    "normalised_text": "submit"
+  },
+  {
+    "note": "entities are left as axe emits them, not decoded",
+    "rule": "link-name",
+    "selector": "a.terms",
+    "html": "\u003ca class=\"terms\"\u003eTerms \u0026amp; conditions\u003c/a\u003e",
+    "fingerprint": "f_0377db59",
+    "fingerprint_loose": "f_2e28f869",
+    "normalised_selector": "a.terms",
+    "normalised_text": "terms \u0026amp; conditions"
+  },
+  {
+    "note": "single-quoted attributes are stripped in shape too",
+    "rule": "input-image-alt",
+    "selector": "input[type=image]",
+    "html": "\u003cinput type='image' src='/go.png'\u003e",
+    "fingerprint": "f_2f4ebfc8",
+    "fingerprint_loose": "f_4bb63f9a",
+    "normalised_selector": "input[type=image]",
+    "normalised_text": ""
+  },
+  {
+    "note": "case folding outside ASCII: Turkish dotted capital I and Greek final sigma",
+    "rule": "color-contrast",
+    "selector": ".tr",
+    "html": "\u003cp\u003eİSTANBUL ΣOS İ̇ ẞ\u003c/p\u003e",
+    "fingerprint": "f_14568d1f",
+    "fingerprint_loose": "f_91356c09",
+    "normalised_selector": ".tr",
+    "normalised_text": "İstanbul Σos İ̇ ẞ"
+  },
+  {
+    "note": "Greek final sigma: JavaScript lowercases a trailing capital to ς, Go to σ",
+    "rule": "color-contrast",
+    "selector": ".gr",
+    "html": "\u003cp\u003eΟΣ ΑΣ\u003c/p\u003e",
+    "fingerprint": "f_0bc81d8a",
+    "fingerprint_loose": "f_8a23fa3b",
+    "normalised_selector": ".gr",
+    "normalised_text": "ΟΣ ΑΣ"
+  },
+  {
+    "note": "BEM element names must not collapse into each other",
+    "rule": "color-contrast",
+    "selector": ".hero__subtitle",
+    "html": "\u003cp class=\"hero__subtitle\"\u003eShip faster\u003c/p\u003e",
+    "fingerprint": "f_a91a55e2",
+    "fingerprint_loose": "f_8dc06a51",
+    "normalised_selector": ".hero__subtitle",
+    "normalised_text": "ship faster"
+  },
+  {
+    "note": "same rule, different element: fingerprints must differ",
+    "rule": "color-contrast",
+    "selector": ".hero__title",
+    "html": "\u003ch1 class=\"hero__title\"\u003eShip faster\u003c/h1\u003e",
+    "fingerprint": "f_1519fd36",
+    "fingerprint_loose": "f_8dc06a51",
+    "normalised_selector": ".hero__title",
+    "normalised_text": "ship faster"
+  }
+]

@@ -1,0 +1,52 @@
+{
+  "name": "@skiplink/cli",
+  "version": "1.0.0",
+  "description": "Accessibility gate for CI. Runs axe-core against your URLs and fails the build only on violations you have not already accepted.",
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "wcag",
+    "axe-core",
+    "ci",
+    "github-actions",
+    "testing",
+    "audit"
+  ],
+  "homepage": "https://skiplink.dev",
+  "bugs": {
+    "url": "https://github.com/skiplink/packages/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skiplink/packages.git",
+    "directory": "cli"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Farid Mammadov",
+    "email": "faridmmmdv@gmail.com"
+  },
+  "type": "module",
+  "bin": {
+    "skiplink": "src/index.js"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "src"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "prepublishOnly": "node --test"
+  },
+  "dependencies": {
+    "@skiplink/core": "^1.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "name": "@skiplink/cypress",
+  "version": "1.0.0",
+  "description": "Accessibility gate for Cypress. Runs axe-core in the page your test already has open and fails only on violations that are not in your baseline.",
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "wcag",
+    "axe-core",
+    "cypress",
+    "testing",
+    "ci",
+    "cypress-plugin"
+  ],
+  "homepage": "https://skiplink.dev/integrations/cypress/",
+  "bugs": {
+    "url": "https://github.com/skiplink/packages/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skiplink/packages.git",
+    "directory": "adapters/cypress"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Farid Mammadov",
+    "email": "faridmmmdv@gmail.com"
+  },
+  "type": "module",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./task": {
+      "types": "./src/task.d.ts",
+      "default": "./src/task.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "src"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "prepublishOnly": "node --test"
+  },
+  "dependencies": {
+    "@skiplink/core": "^1.0.0"
+  },
+  "peerDependencies": {
+    "axe-core": ">=4.8.0",
+    "cypress": ">=13.0.0"
+  },
+  "peerDependenciesMeta": {
+    "cypress": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "axe-core": "^4.12.1",
+    "cypress": "^15"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

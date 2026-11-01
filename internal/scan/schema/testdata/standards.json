@@ -1,0 +1,30 @@
+{
+  "all": null,
+  "section508": [
+    "section508"
+  ],
+  "wcag21a": [
+    "wcag2a",
+    "wcag21a"
+  ],
+  "wcag21aa": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21a",
+    "wcag21aa"
+  ],
+  "wcag22aa": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21a",
+    "wcag21aa",
+    "wcag22aa"
+  ],
+  "wcag2a": [
+    "wcag2a"
+  ],
+  "wcag2aa": [
+    "wcag2a",
+    "wcag2aa"
+  ]
+}

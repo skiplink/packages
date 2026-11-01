@@ -1,0 +1,69 @@
+{
+  "name": "@skiplink/playwright",
+  "version": "1.0.0",
+  "description": "Accessibility gate for Playwright. Runs axe-core in the page your test already has open and fails only on violations that are not in your baseline.",
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "wcag",
+    "axe-core",
+    "playwright",
+    "testing",
+    "ci"
+  ],
+  "homepage": "https://skiplink.dev/integrations/playwright/",
+  "bugs": {
+    "url": "https://github.com/skiplink/packages/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skiplink/packages.git",
+    "directory": "adapters/playwright"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Farid Mammadov",
+    "email": "faridmmmdv@gmail.com"
+  },
+  "type": "module",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "src"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "prepublishOnly": "node --test"
+  },
+  "dependencies": {
+    "@skiplink/core": "^1.0.0"
+  },
+  "peerDependencies": {
+    "axe-core": ">=4.8.0",
+    "playwright": ">=1.40.0"
+  },
+  "peerDependenciesMeta": {
+    "playwright": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "axe-core": "^4.12.1",
+    "playwright": "^1.49.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

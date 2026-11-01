@@ -1,0 +1,94 @@
+# Publish the @skiplink packages to npm with provenance.
+#
+# Run by hand from the Actions tab (or `gh workflow run publish.yml`). It publishes in
+# dependency order — @skiplink/core first, because the other four depend on it — and
+# skips any package whose version is already on npm, so a re-run after a partial
+# failure finishes the job instead of failing on the ones that succeeded.
+#
+# Provenance links each tarball on npmjs.com to this repository and the exact run
+# that built it. npm only issues it from a public repository, which is one more
+# reason this mirror has to be public before anything is published.
+#
+# Releases are staged: launch day publishes core, cli and playwright only; the Cypress
+# adapter and the editor integration (mcp) follow in their own releases. The `packages`
+# input names which directories this run may publish — it defaults to the launch set,
+# so a run that forgets to set it can never publish cypress or mcp early. Order is
+# still fixed by the list below, whatever order the input gives.
+#
+#   gh workflow run publish.yml -R skiplink/packages -f dry-run=true
+#   gh workflow run publish.yml -R skiplink/packages -f dry-run=true -f packages=adapters/cypress
+#   gh workflow run publish.yml -R skiplink/packages -f dry-run=true -f packages=mcp
+#
+# Needs one repository secret: NPM_TOKEN, a granular automation token with publish
+# rights on the @skiplink scope.
+
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Pack and print what would be published, without publishing'
+        type: boolean
+        default: true
+      packages:
+        description: 'Space-separated package directories to publish (default: the launch set)'
+        type: string
+        default: 'packages/core cli adapters/playwright'
+
+permissions:
+  contents: read
+  id-token: write     # provenance
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    env:
+      CYPRESS_INSTALL_BINARY: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: npm install --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+
+      - name: Publish in dependency order
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          DRY_RUN: ${{ inputs.dry-run }}
+          SELECTED: ${{ inputs.packages }}
+        run: |
+          set -euo pipefail
+          for want in $SELECTED; do
+            case " packages/core cli adapters/playwright adapters/cypress mcp " in
+              *" $want "*) ;;
+              *) echo "✗ unknown package directory: $want"; exit 1 ;;
+            esac
+          done
+          for dir in packages/core cli adapters/playwright adapters/cypress mcp; do
+            case " $SELECTED " in
+              *" $dir "*) ;;
+              *) echo "· $dir not selected for this run — skipping"; continue ;;
+            esac
+            name=$(node -p "require('./$dir/package.json').name")
+            version=$(node -p "require('./$dir/package.json').version")
+            if npm view "$name@$version" version > /dev/null 2>&1; then
+              echo "· $name@$version is already on npm — skipping"
+              continue
+            fi
+            if [ "$DRY_RUN" = "true" ]; then
+              echo "── would publish $name@$version"
+              (cd "$dir" && npm publish --dry-run --access public)
+            else
+              echo "── publishing $name@$version"
+              (cd "$dir" && npm publish --provenance --access public)
+            fi
+          done
